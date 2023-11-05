@@ -3,12 +3,14 @@ import random
 import os
 import time
 
-current_state =[[0 for x in range(10)] for x in range(10)]
+n = 20
 
-og_map =[[0 for x in range(10)] for x in range(10)]
+current_state =[[0 for x in range(n)] for x in range(n)]
 
-for i in range(10):
-  for j in range(10):
+og_map =[[0 for x in range(n)] for x in range(n)]
+
+for i in range(n):
+  for j in range(n):
     t = random.randint(1, 10)
     if(t > 8):
       current_state[i][j] = '@'
@@ -17,10 +19,10 @@ for i in range(10):
       current_state[i][j] = '^'
       og_map[i][j] = '^'
     
-  
+current_state[0][0] = 'P' 
 def print_state():
-  for i in range(10):
-    for j in range(10):
+  for i in range(n):
+    for j in range(n):
       if(current_state[i][j] == '@'):
         print(Fore.RED + current_state[i][j], end="")
       elif(current_state[i][j] == '^'):
@@ -35,14 +37,25 @@ y_pi = 0
 x_ci =0
 y_ci = 0
 
+c1 = 0
+c2 = 0
+p1 = 0
+p2 = 0
+
 def move_player(x_pi, y_pi, x_ci, y_ci):
   current_state[x_pi][y_pi] = 'P'
   current_state[x_ci][y_ci] = og_map[x_ci][y_ci]
   print_state()
   print()
-c1 = 0
-c2 = 0
-prev_ind = 0
+
+def rolldie():
+  d1 = random.randint(1, 6)
+  d2 = random.randint(1, 6)
+  p1 += d1
+  p2 += d2
+  
+
+print_state()
 while(True):
   
   p1 = int(input())
